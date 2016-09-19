@@ -13,7 +13,6 @@
         <div class="col-md-6">
             <div class="form-group" >
                 <h3>Order List</h3>
-
                 order index
             </div>
         </div>
