@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Support\Contracts;
+namespace App\Http\Support;
 
 use Countable;
 
-use Cart\Support\Storage\Contracts\StorageInterface;
+use App\Http\Support\Contracts\StorageInterface;
 class SessionStorage implements StorageInterface, Countable
 {
     protected $bucket;
@@ -42,7 +42,7 @@ class SessionStorage implements StorageInterface, Countable
     public function undoset($index){
 
         if($this->exists($index)){
-            unset($_SESSION[$this->bucket][4]);
+            unset($_SESSION[$this->bucket][$index]);
         }
     }
     public function clear()

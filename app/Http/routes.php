@@ -17,4 +17,5 @@ Route::post('/create','HomeController@create');
 Route::get('/item/search','ItemController@search');
 Route::get('/item','ItemController@itemContent');
 Route::get('/item/edit/{id}','ItemController@itemEdit');
-Route::post('/addToOrder/{id}','ItemController@addToOrder');
+Route::post('/order/add/{id}','OrderController@add');
+Route::get('/order/basket','OrderController@basketall');

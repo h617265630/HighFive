@@ -9,11 +9,13 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 use App\Http\Model\Order;
 use App\Http\Model\Item;
+use App\Basket\Basket;
+use Illuminate\Support\Facades\View;
+use App\Http\Controllers\OrderController;
 class CommonController extends Controller
 {
     public function __construct()
     {
-        
-
+      
     }
 }

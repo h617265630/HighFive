@@ -8,11 +8,14 @@ use App\Http\Requests;
 use App\Http\Model\Customer;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
+use App\Basket\Basket;
+use App\Http\Model\Item;
+use App\Http\Support\Contracts\StorageInterface;
 class HomeController extends CommonController
 {
     public function index()
     {
-        return view('home.search');
+        return view('home.search',compact('items'));
     }
     //located at index page, for searching customer.(check if the customer is exist according to its phone number)
     public function search()

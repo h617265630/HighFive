@@ -1,55 +1,55 @@
 <?php
 
 namespace App\Basket;
-use App\Http\Model\Item;
+use App\Http\Model\item;
 use App\Http\Support\Contracts\StorageInterface;
 
 class Basket
 {
     protected $storage;
-    protected $product;
-    public function __construct(StorageInterface $storage,Product $product)
+    protected $item;
+    public function __construct(StorageInterface $storage,item $item)
     {
         $this->storage=$storage;
-        $this->product=$product;
+        $this->item=$item;
     }
 
-    public function add(Product $product,$quantity)
+    public function add(item $item,$quantity)
     {
-        if($this->has($product)){
+        if($this->has($item)){
             //set quantity to the current quantity + new quantity
-            $quantity = $this->get($product)['quantity']+$quantity;
+            $quantity = $this->get($item)['quantity']+$quantity;
         }
-        $this->update($product,$quantity);
-        //update session with product
+        $this->update($item,$quantity);
+        //update session with item
     }
 
-    public function update(Product $product ,$quantity)
+    public function update(item $item ,$quantity)
     {
-        if(!$this->product->find($product->id)->hasStock($quantity)){
+        if(!$this->item->find($item->id)->hasStock($quantity)){
             throw new QuantityExceededException;
         }
         if((int)$quantity == 0)
         {
-            $this->remove($product);
+            $this->remove($item);
         }
-        $this->storage->set($product->id,[
-            'product_id'=>(int)$product->id,
+        $this->storage->set($item->id,[
+            'item_id'=>(int)$item->id,
             'quantity'=>(int)$quantity,
         ]);
     }
-    public function has(Product $product)
+    public function has(item $item)
     {
-        return $this->storage->exists($product->id);
+        return $this->storage->exists($item->id);
     }
-    public function remove(Product $product)
+    public function remove(item $item)
     {
-        $this->storage->undoset($product['id']);
+        $this->storage->undoset($item['id']);
     }
 
-    public function get(Product $product)
+    public function get(item $item)
     {
-        return $this->storage->get($product->id);
+        return $this->storage->get($item->id);
     }
 
     public function clear()
@@ -61,14 +61,14 @@ class Basket
     {
         $ids=[];
         $items=[];
-        foreach($this->storage->all() as $product)
+        foreach($this->storage->all() as $item)
         {
-            $ids[]=$product['product_id'];
+            $ids[]=$item['item_id'];
         }
-        $products =$this->product->find($ids);
-        foreach($products as $product){
-            $product->quantity=$this->get($product)['quantity'];
-            $items[] = $product;
+        $items =$this->item->find($ids);
+        foreach($items as $item){
+            $item->quantity=$this->get($item)['quantity'];
+            $items[] = $item;
         }
         return $items;
     }

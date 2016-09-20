@@ -17,6 +17,7 @@ class CreateItemsTable extends Migration
             $table->string('name', 255);
             $table->text('detail');
             $table->double('price', 2);
+            $table->integer('stock');
         });
     }
 

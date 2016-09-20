@@ -19,11 +19,13 @@
                     <td>{{$item->name}}</td>
                     <td>{{$item->detail}}</td>
                     <td>{{$item->price}}</td>
-                    <form method="post" action="{{url('/addToOrder/'.$item->id)}}">
+                    <form method="post" action="{{url('/order/add/'.$item->id)}}">
                         {{csrf_field()}}
                     <td>
                         <select name="quantity" class="form-control input-sm">
-                            <option value="1" selected>1</option>
+                           @for($num=1;$num<=$item->stock;$num++)
+                            <option value="{{$num}}">{{$num}}</option>
+                            @endfor
                             <option value="0">None</option>
                         </select>
                     </td>

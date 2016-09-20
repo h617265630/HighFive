@@ -25,7 +25,7 @@
 
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true">
+                <li><a href="{{url('/order/basket')}}"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true">
                         </span>Order</a></li>
             </ul>
         </div>
@@ -55,7 +55,9 @@
                     </tr>
                     </thead>
                     <tbody>
-
+                    <tr>
+                        <td><p>some items</p></td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
